@@ -2,4 +2,5 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
 <h3>Book List</h3>
+<!-- 3일차 -->
 <%@ include file="../include/footer.jsp" %>
