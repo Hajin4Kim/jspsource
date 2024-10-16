@@ -103,7 +103,7 @@ public class BookDAO {
 
 		try {
 			con = getConnection();
-			String sql = "SELECT * FROM booktbl";
+			String sql = "SELECT * FROM booktbl ORDER BY CODE";
 			pstmt = con.prepareStatement(sql);
 			// sql 구문? 해결 (없으면 건너뛰기)
 			rs = pstmt.executeQuery();
@@ -186,7 +186,7 @@ public class BookDAO {
 		
 		try {
 			con = getConnection();
-			String sql = "INSERT INTO booktbl(code, title, writer, price, description) values(?, ?, ?, ?)";
+			String sql = "INSERT INTO booktbl(code, title, writer, price, description) values(?, ?, ?, ?, ?)";
 			pstmt = con.prepareStatement(sql);
 			// sql 구문? 해결
 			pstmt.setInt(1, insertDto.getCode());
