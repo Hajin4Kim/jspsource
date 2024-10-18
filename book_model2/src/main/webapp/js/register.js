@@ -1,4 +1,4 @@
-document.querySelector(".btn-success").addEventListener("click", () => {
+document.querySelector("#register .btn-success").addEventListener("click", () => {
 
 	// userid 가져오기
 	const userid = document.querySelector("#userid").value;
@@ -6,7 +6,7 @@ document.querySelector(".btn-success").addEventListener("click", () => {
 	const form = new FormData();
 	form.append("userid", userid);
 
-	fetch(`/member/checkid_pro.jsp`, {
+	fetch(`/dup.do`, {
 		method: "post",
 		body: new URLSearchParams(form) 
 	})

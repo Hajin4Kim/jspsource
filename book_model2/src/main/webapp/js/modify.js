@@ -1,12 +1,12 @@
 // 목록 버튼 클릭 시, list로 이동(location)하게
 // 버튼 타입이 button 인 경우, .addEventListener("click"
 document.querySelector(".btn-primary").addEventListener("click", () => {
-	location.href= "/list.do";
+	location.href= "/list.do?keyword="+keyword;
 })
 
 // 삭제 버튼 클릭 시, 
 document.querySelector(".btn-danger").addEventListener("click", () => {
-	location.href= "delete_pro.jsp?code="+code;
+	location.href= "/delete.do?code="+code+"&keyword="+keyword;
 })
 
 // 수정 버튼 클릭 시, price 의 값이 숫자가 들어있는지 확인 => 안들어와있으면 경고메시지 + 제출불가

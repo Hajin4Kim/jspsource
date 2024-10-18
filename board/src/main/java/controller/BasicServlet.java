@@ -11,16 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.ActionForward;
-import action.BookCreateAction;
-import action.BookDeleteAction;
-import action.BookListAction;
-import action.BookReadAction;
-import action.BookUpdateAction;
-import action.MemberDupAction;
-import action.MemberInfoAction;
-import action.MemberLoginAction;
-import action.MemberLogoutAction;
-import action.MemberRegisterAction;
+
 
 
 /**
@@ -52,43 +43,7 @@ public class BasicServlet extends HttpServlet {
 		
 		Action action = null;
 		
-		if(cmd.equals("/list.do")) {
-			action = new BookListAction("/book/list.jsp");
-		}else if(cmd.equals("/read.do")) {
-			action = new BookReadAction("/book/read.jsp");
-			
-		}else if(cmd.equals("/modify.do")) { // BookReadAction재활용
-			action = new BookReadAction("/book/modify.jsp");
-			
-		}else if(cmd.equals("/update.do")) { 
-			action = new BookUpdateAction("/read.do");
-			
-		}else if(cmd.equals("/delete.do")) { 
-			action = new BookDeleteAction("/list.do");
-			
-		}else if(cmd.equals("/create.do")){
-			action = new BookCreateAction("/read.do");
-		}
 		
-		else if(cmd.equals("/login.do")) {
-			System.out.println("로그인작업성공");
-			action = new MemberLoginAction("/list.do");
-			
-		}else if(cmd.equals("/logout.do")) {
-			System.out.println("로그아웃작업성공");
-			action = new MemberLogoutAction("/");
-			
-		}else if(cmd.equals("/info.do")) {
-			System.out.println("인포작업성공");
-			action = new MemberInfoAction("/member/login.jsp");
-			
-		}else if(cmd.equals("/register.do")){
-			System.out.println("회원가입 작업성공");
-			action = new MemberRegisterAction("/member/login.jsp");
-		}else if(cmd.equals("/dup.do")){ // 아이디 중복확인
-			System.out.println("아이디 중복확인 작업성공");
-			action = new MemberDupAction("/member/checkid.jsp");
-		}
 		
 		ActionForward af = null;
 		

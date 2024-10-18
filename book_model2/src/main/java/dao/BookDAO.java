@@ -108,14 +108,15 @@ public class BookDAO {
 		return dto;
 	}
 
-	public List<BookDTO> getList() {
+	public List<BookDTO> getList(String keyword) {
 		List<BookDTO> list = new ArrayList<BookDTO>();
 
 		try {
 			con = getConnection();
-			String sql = "SELECT * FROM booktbl ORDER BY CODE";
+			String sql = "SELECT * FROM BOOKTBL WHERE TITLE LIKE ? ORDER BY CODE DESC";
 			pstmt = con.prepareStatement(sql);
 			// sql 구문? 해결 (없으면 건너뛰기)
+			pstmt.setString(1, "%" +keyword+ "%");
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {

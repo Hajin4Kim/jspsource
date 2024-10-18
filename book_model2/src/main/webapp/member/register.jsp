@@ -4,7 +4,7 @@
 
 <h3>Register</h3>
 
-<form method="post" action="register_pro.jsp">
+<form method="post" action="/register.do" id="register">
 	<div class="row mb-3">
 		<label for="userid" class="col-sm-2 col-form-label">아이디</label>
 		<div class="col-sm-8">

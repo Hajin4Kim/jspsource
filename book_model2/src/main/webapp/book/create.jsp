@@ -8,7 +8,7 @@ BookDTO dto = (BookDTO) request.getAttribute("dto");
 %>
 <h3>Insert</h3>
 
-<form method="post" action="create_pro.jsp">
+<form method="post" action="/create.do">
 	<div class="row mb-3">
 		<label for="code" class="col-sm-2 col-form-label">Code</label>
 		<div class="col-sm-10">
@@ -41,7 +41,7 @@ BookDTO dto = (BookDTO) request.getAttribute("dto");
 		</div>
 	</div>
 	<button type="submit" class="btn btn-secondary">추가</button>
-	<button type="button" class="btn btn-primary">목록</button>
+	<a class="btn btn-primary" href="/list.do?keyword=${keyword}">목록</a>
 	
 </form>
 

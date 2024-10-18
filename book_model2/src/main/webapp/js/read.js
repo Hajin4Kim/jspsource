@@ -1,7 +1,7 @@
 // 목록 버튼 클릭 시, list로 이동(location)하게
 // 버튼 타입이 button 인 경우, .addEventListener("click"
 document.querySelector(".btn-primary").addEventListener("click", () => {
-	location.href= "/list.do";
+	location.href= "/list.do?keyword="+keyword;
 })
 
 // 버튼 타입이 submit 인 경우, .addEventListener("submit"

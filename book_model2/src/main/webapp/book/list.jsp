@@ -5,7 +5,7 @@
 <%@ include file="../include/header.jsp"%>
 <%-- 가져온 형식 List<BookDTO> 대로 형변환/ forward() 로 가져온 값  --%>
 <%
-List<BookDTO> list = (List<BookDTO>) request.getAttribute("list");
+//List<BookDTO> list = (List<BookDTO>) request.getAttribute("list");
 %>
 <h3>Book List</h3>
 
@@ -19,18 +19,20 @@ List<BookDTO> list = (List<BookDTO>) request.getAttribute("list");
 		</tr>
 	</thead>
 	<tbody>
-		<%
+		<%--
 		for (BookDTO dto : list) {
-		%>
+		--%>
+		<c:forEach var="dto" items="${list}" >
 		<tr>
-			<td><%=dto.getCode()%></td>
-			<td><a href="/read.do?code=<%=dto.getCode()%>" class="text-decoration-none text-reset"><%=dto.getTitle()%></a></td>
-			<td><%=dto.getWriter()%></td>
-			<td><%=dto.getPrice()%></td>
+			<td>${dto.code}</td>
+			<td><a href="/read.do?code=${dto.code}&keyword=${keyword}" class="text-decoration-none text-reset">${dto.title}</a></td>
+			<td>${dto.writer}</td>
+			<td>${dto.price}</td>
 		</tr>
-		<%
+		</c:forEach>
+		<%--
 		}
-		%>
+		--%>
 	</tbody>
 </table>
 

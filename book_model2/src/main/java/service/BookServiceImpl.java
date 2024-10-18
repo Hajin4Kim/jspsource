@@ -10,9 +10,9 @@ public class BookServiceImpl implements BookService {
 	BookDAO dao = new BookDAO();
 	
 	@Override
-	public List<BookDTO> list() {
+	public List<BookDTO> list(String keyword) {
 		// TODO Auto-generated method stub
-		return dao.getList();
+		return dao.getList(keyword);
 	}
 
 	@Override

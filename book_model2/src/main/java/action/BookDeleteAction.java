@@ -1,5 +1,6 @@
 package action;
 
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +12,7 @@ import service.BookService;
 import service.BookServiceImpl;
 
 @AllArgsConstructor
-public class BookReadAction implements Action {
+public class BookDeleteAction implements Action {
 
 	private String path;
 	
@@ -19,17 +20,23 @@ public class BookReadAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// 1. 가져오기 
 		int code = Integer.parseInt(request.getParameter("code"));
-		String keyword = request.getParameter("keyword"); // 키워드 검색으로 들어온 화면=> 목록 누르면 다시 키워드 검색 페이지로 이동
+		String keyword = request.getParameter("keyword");
 		
 		// 2. Service 호출
 		BookService service = new BookServiceImpl();
-		BookDTO dto = service.read(code);
+		boolean deleteFlag = service.delete(code);
 		
-		request.setAttribute("dto", dto);
-		request.setAttribute("keyword", keyword);
-		
-		// 3. (request.setAttribute)이면 당연히 => forward 이면 당연히 => false
-		return new ActionForward(path, false);
+		// 4. page return
+		// ==1 (성공) /list.do => BasicServlet 에 갈 곳 둠
+		if(!deleteFlag) {
+			//0 (실패) => 제자리
+			path  = "/modify.do?code="+code;
+			
+		}else {
+			// URLEncoder.encode(keyword, "utf-8") 안하면 한글깨짐(검색어로 넘어갈때)
+			path += "?keyword="+URLEncoder.encode(keyword, "utf-8");
+		}
+		return new ActionForward(path, true);
 	}
 
 }
