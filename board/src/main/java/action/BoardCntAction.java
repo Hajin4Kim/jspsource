@@ -12,7 +12,7 @@ import service.BoardServiceImpl;
 
 
 @AllArgsConstructor
-public class BoardReadAction implements Action {
+public class BoardCntAction implements Action {
 	
 	private String path;
 	
@@ -21,15 +21,17 @@ public class BoardReadAction implements Action {
 		
 		// 1. 가져오기
 		int bno = Integer.parseInt(request.getParameter("bno"));
-		
+	
 		// 2. Service 호출
 		BoardService service = new BoardServiceImpl();
-		BoardDTO dto = service.getRow(bno);
 		
-		request.setAttribute("dto", dto);
+		// 조회수 업데이트 로직 추가
+		service.hitUpdate(bno);
+		
+		path += "?bno="+bno;
 		
 		//4. return
-		return new ActionForward(path, false);
+		return new ActionForward(path, true);
 	}
 
 }

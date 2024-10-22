@@ -11,11 +11,11 @@
 		</div>
 		<div class="form-group">
 			<label for="title">제목</label> 
-			<input type="text" class="form-control" id="title" name="title" value="${dto.title}" required="required"/>
+			<input type="text" class="form-control" id="title" name="title" value="${dto.title}"/>
 		</div>
 		<div class="form-group">
 			<label for="content">내용</label> 
-			<textarea rows="15" type="text" class="form-control" id="content" name="content" required="required">${dto.content}</textarea>
+			<textarea rows="15" type="text" class="form-control" id="content" name="content">${dto.content}</textarea>
 		</div>
 		<div class="form-group">
 			<label for="name">작성자</label> 
@@ -23,7 +23,7 @@
 		</div>
 		<div class="form-group">
 			<label for="password">비밀번호</label> 
-			<input type="password" class="form-control" id="password" name="password" required="required"/>
+			<input type="password" class="form-control" id="password" name="password" />
 		</div>
 		<div class="form-group">
 			<label for="attach">첨부파일</label> 

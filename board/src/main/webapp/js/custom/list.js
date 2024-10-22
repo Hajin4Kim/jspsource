@@ -32,8 +32,8 @@ document.querySelector("tbody").addEventListener("click", (e)=> {
 	console.log(actionForm.innerHTML); // <input type="hidden" name="bno" value="4">
 
 	// actionForm submit
-	// action : /read.do 로 변경
-	actionForm.action = "/read.do";
+	// action : /cntupdate.do 로 변경
+	actionForm.action = "/cntupdate.do";
 	actionForm.submit();
 	
 	

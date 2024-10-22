@@ -1,22 +1,40 @@
-// 목록 버튼 클릭 시,
 // actionForm action = "/list.do"로 수정 후 submit
 
 const actionForm = document.querySelector("#actionForm");
-document.querySelector("#readForm .btn-success").addEventListener("click", () => {
-	// actionForm bno 요소 제거
-	actionForm.querySelector("[name='bno']").remove();
-	actionForm.action = "/list.do";
-	actionForm.submit();
-});
 
+/* 
+modify,jsp 수정, 삭제 목록 버튼 이벤트
+*/
 // read.jsp 에서 수정버튼 클릭 시,
 // actionForm action = "/modify.do"로 수정 후 submit
-document.querySelector("#readForm .btn-primary").addEventListener("click", () => {
+const modifyBtn = document.querySelector("#readForm .btn-info");
+if (modifyBtn) {
+	modifyBtn.addEventListener("click", () => {
+		// 값이 있다면 실행
+		actionForm.action = "/modify.do";
+		actionForm.submit();
+	});
+}
 
-	// 값이 있다면 실행
-	actionForm.action = "/modify.do";
-	actionForm.submit();
-});
+// 목록 버튼 클릭 시,
+const listBtn = document.querySelector("#readForm .btn-success");
+if (listBtn) {
+	listBtn.addEventListener("click", () => {
+		// actionForm bno 요소 제거
+		actionForm.querySelector("[name='bno']").remove();
+		actionForm.action = "/list.do";
+		actionForm.submit();
+	});
+}
+
+// 삭제 버튼 클릭 시, #readForm 의 action="/delete.do" 로 변경
+const removeBtn = document.querySelector(".btn-danger");
+if (removeBtn) {
+	removeBtn.addEventListener("click", () => {
+		readForm.action = "/delete.do";
+		readForm.submit();
+	});
+}
 
 // modify.jsp 에서 수정 클릭시(submit)
 // readForm 안에 password,title,content 값이 있는지 확인하고 
@@ -49,9 +67,3 @@ readForm.addEventListener("submit", (e) => {
 });
 
 
-// 삭제 버튼 클릭 시, #readForm 의 action="/delete.do" 로 변경
-
-document.querySelector(".btn-danger").addEventListener("click", () => {
-	readForm.action = "/delete.do";
-	readForm.submit();
-});
