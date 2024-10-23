@@ -17,6 +17,7 @@ import action.BoardCreateAction;
 import action.BoardDeleteAction;
 import action.BoardListAction;
 import action.BoardReadAction;
+import action.BoardReplyAction;
 import action.BoardUpdateAction;
 
 
@@ -71,6 +72,10 @@ public class BasicServlet extends HttpServlet {
 		}else if(cmd.equals("/cntupdate.do")) { // 조회수증가 수행
 			// 추가등록 성공 후 리스트로 이동
 			action = new BoardCntAction("/read.do");
+		}else if(cmd.equals("/replyView.do")) { // 답변 폼 보여주기
+			action = new BoardReadAction("/board/reply.jsp");
+		}else if(cmd.equals("/reply.do")) { //댓글 등록
+			action = new BoardReplyAction("/list.do");
 		}
 		
 		ActionForward af = null;

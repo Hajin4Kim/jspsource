@@ -27,6 +27,17 @@ if (listBtn) {
 	});
 }
 
+// 답변(댓글추가) 클릭 시 actionForm action="replyView.do" 수정 후 submit
+const replyBtn = document.querySelector("#readForm .btn-secondary");
+if(replyBtn){
+	replyBtn.addEventListener("click", ()=>{
+		actionForm.action = "/replyView.do";
+		actionForm.submit();
+	});
+	
+}
+
+
 // 삭제 버튼 클릭 시, #readForm 의 action="/delete.do" 로 변경
 const removeBtn = document.querySelector(".btn-danger");
 if (removeBtn) {

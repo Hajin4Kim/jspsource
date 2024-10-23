@@ -4,14 +4,15 @@ import java.util.List;
 
 import dao.BoardDAO;
 import dto.BoardDTO;
+import dto.SearchDTO;
 
 public class BoardServiceImpl implements BoardService {
 
 	private BoardDAO dao = new BoardDAO();
 	
 	@Override
-	public List<BoardDTO> listAll() {
-		return dao.getList();
+	public List<BoardDTO> listAll(SearchDTO searchDTO) {
+		return dao.getList(searchDTO);
 	}
 
 	@Override
@@ -37,6 +38,16 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public boolean hitUpdate(int bno) { // 조회수증가
 		return dao.updateReadCnt(bno)==1?true:false;
+	}
+
+	@Override
+	public boolean reply(BoardDTO replyDto) { // 댓글 추가
+		return dao.replyInsert(replyDto)==1?true:false;
+	}
+
+	@Override
+	public int getTotalRows() {
+		return dao.getTotalRows();
 	}
 
 }
