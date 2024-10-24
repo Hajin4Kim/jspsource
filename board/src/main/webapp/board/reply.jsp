@@ -26,6 +26,12 @@ enctype="multipart/form-data" (첨부파일 있는 경우)
 			<label for="password">비밀번호</label> 
 			<input type="password" class="form-control" id="password" name="password" required="required" />
 		</div>
+		<!-- 페이지나누기 정보 -->
+		<input type="hidden" name="page" value="${searchDTO.page}" /> 
+		<input type="hidden" name="amount" value="${searchDTO.amount}" /> 
+		<input type="hidden" name="criteria" value="${searchDTO.criteria}" /> 
+		<input type="hidden" name="keyword" value="${searchDTO.keyword}" />
+		
 		<!-- 부모글에 대한 정보 가져오기-->
 		<input type="hidden" name="re_ref" value="${dto.re_ref}" />
 		<input type="hidden" name="re_lev" value="${dto.re_lev}" />
@@ -39,7 +45,10 @@ enctype="multipart/form-data" (첨부파일 있는 경우)
 </div>
 <%-- 페이지 나누기  --%>
 <form action="/list.do" method="get" id="actionForm">
-
+<input type="hidden" name="page" value="${searchDTO.page}" /> 
+<input type="hidden" name="amount" value="${searchDTO.amount}" /> 
+<input type="hidden" name="criteria" value="${searchDTO.criteria}" /> 
+<input type="hidden" name="keyword" value="${searchDTO.keyword}" />
 </form>
 <script src="/js/custom/reply.js"></script>
 <%@ include file="../include/footer.jsp"%>

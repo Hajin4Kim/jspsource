@@ -1,5 +1,7 @@
 package action;
 
+import java.net.URLEncoder;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,16 +25,26 @@ public class BoardDeleteAction implements Action {
 		deleteDto.setBno(Integer.parseInt(request.getParameter("bno")));
 		deleteDto.setPassword(request.getParameter("password"));
 		
+		// 페이지 나누기
+		int page = Integer.parseInt(request.getParameter("page"));
+		int amount = Integer.parseInt(request.getParameter("amount"));
+
+		// 검색기능 추가
+		String criteria = request.getParameter("criteria");
+		String keyword = URLEncoder.encode(request.getParameter("keyword"), "utf-8");
+		
 		// 2. Service 호출
 		BoardService service = new BoardServiceImpl();
-		boolean deleteFlag = service.delete(deleteDto);
+		boolean updateFlag = service.delete(deleteDto);
 		
 		
 		//4. return
-		if (!deleteFlag) {
-			// ==0 실패 : 제자리
-			path += "/modify.do?bno= "+deleteDto.getBno();
-		}//else { //==1 은  리스트 페이지로 (삭제된거 다시 보여주기)}
+		if (updateFlag) {
+			// 성공시
+			path += "?page="+page+"&amount="+amount+"&criteria="+criteria+"&keyword="+keyword;
+		}else {
+			path = "/modify.do?bno=" + deleteDto.getBno() + "&page="+page+"&amount="+amount+"&criteria="+criteria+"&keyword="+keyword;
+	}
 
 		
 		return new ActionForward(path, true);

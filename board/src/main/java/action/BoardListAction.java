@@ -36,7 +36,7 @@ public class BoardListAction implements Action {
 		List<BoardDTO> list = service.listAll(searchDTO);
 		
 		// Pagination
-		int total = service.getTotalRows();
+		int total = service.getTotalRows(searchDTO);
 		PageDTO pageDTO = new PageDTO(searchDTO, total);
 		
 		

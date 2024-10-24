@@ -1,6 +1,7 @@
 package action;
 
 import java.io.File;
+import java.net.URLEncoder;
 import java.util.Iterator;
 import java.util.UUID;
 
@@ -36,15 +37,24 @@ public class BoardReplyAction implements Action {
 		replyDto.setRe_seq(Integer.parseInt(request.getParameter("re_seq")));
 		replyDto.setBno(Integer.parseInt(request.getParameter("bno")));
 		
+		// 페이지 나누기
+		int page = Integer.parseInt(request.getParameter("page"));
+		int amount = Integer.parseInt(request.getParameter("amount"));
+
+		// 검색기능 추가
+		String criteria = request.getParameter("criteria");
+		String keyword = URLEncoder.encode(request.getParameter("keyword"), "utf-8");
+		
 		// 2. Service 호출
 		BoardService service = new BoardServiceImpl();
 		boolean replyFlag = service.reply(replyDto);
 		
 		
 		//4. return
-		if (replyFlag) {
+		if (replyFlag) { // 앞부분 ? 중요
+			path += "?page="+page+"&amount="+amount+"&criteria="+criteria+"&keyword="+keyword;
 		}else {
-			path = "/replyView.do?bno="+replyDto.getBno();
+			path = "/replyView.do?bno="+replyDto.getBno() + "&page="+page+"&amount="+amount+"&criteria="+criteria+"&keyword="+keyword;
 		}
 		return new ActionForward(path, true);
 	}

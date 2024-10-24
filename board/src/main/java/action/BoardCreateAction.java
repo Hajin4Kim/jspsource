@@ -31,6 +31,15 @@ public class BoardCreateAction implements Action {
 		insertDto.setTitle(request.getParameter("title"));
 		insertDto.setContent(request.getParameter("content"));
 		
+		// 페이지 나누기
+		int page = Integer.parseInt(request.getParameter("page"));
+		int amount = Integer.parseInt(request.getParameter("amount"));
+
+		// 검색기능 추가
+		String criteria = request.getParameter("criteria");
+		String keyword = request.getParameter("keyword");
+		
+		
 		// 첨부파일 가져오기(서블릿 기능 이용)
 		Part part = request.getPart("attach"); // getParameter로 안됨:  request.getPart("") 객체 사용
 		String fileName = getFileName(part);
@@ -57,8 +66,8 @@ public class BoardCreateAction implements Action {
 		
 		//4. return
 		if (insertFlag) {
-			// ==1 은  상세조회 페이지로 (등록된거 다시 보여주기)
-			//path = "/modify.do?bno="+insertDto.getBno();
+			// ==1 은  전체조회 페이지로 (등록된거 다시 보여주기)
+			path += "?page="+page+"&amount="+amount+"&criteria="+criteria+"&keyword="+keyword;
 			
 		}else {
 			path += "/board/create.jsp";

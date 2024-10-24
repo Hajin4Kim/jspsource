@@ -8,44 +8,54 @@
 
 	<form id="readForm">
 		<div class="form-group">
-			<label for="bno">글번호</label> 
-			<input type="text" class="form-control" id="bno" name="bno" readonly value="${dto.bno}" />
+			<label for="bno">글번호</label> <input type="text" class="form-control"
+				id="bno" name="bno" readonly value="${dto.bno}" />
 		</div>
 		<div class="form-group">
-			<label for="title">제목</label> 
-			<input type="text" class="form-control" id="title" name="title" readonly value="${dto.title}" />
+			<label for="title">제목</label> <input type="text" class="form-control"
+				id="title" name="title" readonly value="${dto.title}" />
 		</div>
 		<div class="form-group">
-			<label for="content">내용</label> 
-			<textarea rows="15" type="text" class="form-control" id="content" name="content" readonly >${dto.content}</textarea>
+			<label for="content">내용</label>
+			<textarea rows="15" type="text" class="form-control" id="content"
+				name="content" readonly>${dto.content}</textarea>
 		</div>
 		<div class="form-group">
-			<label for="attach">첨부파일</label> 
-			<% 
-				BoardDTO dto = (BoardDTO)request.getAttribute("dto"); 
-				String encodeFileName = "";
-					
-				if(dto.getAttach()!=null){
-					URLEncoder.encode(dto.getAttach(), "utf-8"); // URLEncoder.encode(원하는값, "원하는인코딩방식");
-				}
-					
+			<label for="attach">첨부파일</label>
+			<%
+			BoardDTO dto = (BoardDTO) request.getAttribute("dto");
+			String encodeFileName = "";
+
+			if (dto.getAttach() != null) {
+				encodeFileName = URLEncoder.encode(dto.getAttach(), "utf-8"); // URLEncoder.encode(원하는값, "원하는인코딩방식");
+			}
 			%>
-			<div><a href="/board/download.jsp?fileName=<%=encodeFileName%>">${dto.attach}</a></div>
+			<div>
+				<a href="/board/download.jsp?fileName=<%=encodeFileName%>">${dto.attach}</a>
+			</div>
 		</div>
 		<div class="form-group">
-			<label for="name">작성자</label> 
-			<input type="text" class="form-control" id="name" name="name" readonly value="${dto.name}"/>
+			<label for="name">작성자</label> <input type="text" class="form-control"
+				id="name" name="name" readonly value="${dto.name}" />
 		</div>
-		
+		<input type="hidden" name="page" value="${searchDTO.page}" /> 
+		<input type="hidden" name="amount" value="${searchDTO.amount}" /> 
+		<input type="hidden" name="criteria" value="${searchDTO.criteria}" /> 
+		<input type="hidden" name="keyword" value="${searchDTO.keyword}" />
+			
 		<button type="button" class="btn btn-info">수정</button>
-		 <button type="button" class="btn btn-secondary">답변</button>
+		<button type="button" class="btn btn-secondary">답변</button>
 		<!--<a class="btn btn-secondary" href="/board/reply.jsp">답변</a>-->
 		<button type="button" class="btn btn-success">목록</button>
 	</form>
 </div>
 <%-- 페이지 나누기  --%>
 <form action="/read.do" method="get" id="actionForm">
-	<input type="hidden" name="bno" value="${dto.bno}" />
+	<input type="hidden" name="bno" value="${dto.bno}" /> <input
+		type="hidden" name="page" value="${searchDTO.page}" /> <input
+		type="hidden" name="amount" value="${searchDTO.amount}" /> <input
+		type="hidden" name="criteria" value="${searchDTO.criteria}" /> <input
+		type="hidden" name="keyword" value="${searchDTO.keyword}" />
 </form>
 <script src="/js/custom/read.js"></script>
 <%@ include file="../include/footer.jsp"%>

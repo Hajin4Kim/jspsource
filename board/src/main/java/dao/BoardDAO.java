@@ -326,18 +326,27 @@ public class BoardDAO {
 	}
 	
 	// 전체 게시물 갯수 리턴 메소드 (Pagination)
-	public int getTotalRows(){
+	public int getTotalRows(SearchDTO searchDTO){
 		int total = 0;
 		
 		try {
 			con = getConnection();
-			String sql = "SELECT COUNT(*) FROM BOARD";
-			pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-
-			if (rs.next()) {
+			if(!searchDTO.getCriteria().isBlank()) {
+				// 검색어를 기준으로 count 세기 -> Pagination
+				String sql = "SELECT COUNT(*) FROM BOARD WHERE"+searchDTO.getCriteria() + " LIKE ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, "%" + searchDTO.getKeyword()+"%");
+				//rs = pstmt.executeQuery();
+			
+			}else {
+				String sql = "SELECT COUNT(*) FROM BOARD";
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				if (rs.next()) {
 				total = rs.getInt(1);
+				}
 			}
+
 			
 		} catch (Exception e) {
 			e.printStackTrace();

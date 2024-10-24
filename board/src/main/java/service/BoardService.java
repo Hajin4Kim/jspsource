@@ -20,6 +20,6 @@ public interface BoardService {
 	// 댓글
 	boolean reply(BoardDTO replyDto);
 	// 페이지네이션
-	int getTotalRows();
+	int getTotalRows(SearchDTO searchDTO);
 	
 }
